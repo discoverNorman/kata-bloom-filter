@@ -11,9 +11,6 @@ namespace BloomFilter.Tests
     [TestClass]
     public class BloomFilterTests
     {
-
-
-
         [TestMethod]
         public void MainLineTestCaseMatch()
         {
@@ -50,20 +47,36 @@ namespace BloomFilter.Tests
             Assert.IsTrue(result1, $"{testWord2} was not added to the filter, and should be the only item in the filter.  Your filter/ hash is broken");
         }
 
+        /// <summary>
+        /// Test to check that the Simple Hash hashes the same for each object.
+        /// </summary>
         [TestMethod]
-        public void HashTest()
+        public void HashTestPositive()
         {
-            Assert.Inconclusive("This is the first of many hash tests to ensure hashes are unique.  This might be replaced by a tested library");
-
-            BloomFilter.IHash<string, int> hash = null;
+            var hash = new SimpleHash();
 
             var testWord = "blarg";
+            var testWord2 = "blarg";
             var result1 = hash.Hash(testWord);
-            var result2 = hash.Hash(testWord);
+            var result2 = hash.Hash(testWord2);
 
             Assert.AreEqual(result1, result2, $"{result1} and {result2} should be identical, the hash algorithm has errors.");
+        }
 
+        /// <summary>
+        /// Negative test to check that the Simple Hash hashes the same for each object.
+        /// </summary>
+        [TestMethod]
+        public void HashTestMegative()
+        {
+            var hash = new SimpleHash();
 
+            var testWord = "blarg";
+            var testWord2 = "blargagain";
+            var result1 = hash.Hash(testWord);
+            var result2 = hash.Hash(testWord2);
+
+            Assert.AreNotEqual(result1, result2, $"{result1} and {result2} should not be identical, the hash algorithm has errors.");
         }
     }
 }

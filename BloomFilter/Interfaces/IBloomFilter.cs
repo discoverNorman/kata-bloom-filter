@@ -13,7 +13,11 @@ namespace BloomFilter
     /// <typeparam name="K">The Key Type of the Hash</typeparam>
     public interface IBloomFilter<T,K>
     {
-        IEnumerable<IHash<T,K>> Hashes { get; }
+        /// <summary>
+        /// The Hash Methohd
+        /// </summary>
+        IHash<string,int> Hash { get; }
+        
         /// <summary>
         /// Adds an item to the Hash
         /// </summary>
