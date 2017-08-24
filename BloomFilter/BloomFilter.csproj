@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IBloomFilter.cs" />
     <Compile Include="Interfaces\IHash.cs" />
+    <Compile Include="NormanBloomFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleHash.cs" />
   </ItemGroup>

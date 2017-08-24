@@ -15,11 +15,10 @@ namespace BloomFilter.Tests
         public void MainLineTestCaseMatch()
         {
 
-            Assert.Inconclusive("Not Yet Implemented");
 
-            BloomFilter.IHash<string, int> hash = null;
+            BloomFilter.IHash<string, int> hash = new SimpleHash();
 
-            BloomFilter.IBloomFilter<string,int> bloomFilter = null;
+            BloomFilter.IBloomFilter<string,int> bloomFilter = new NormanBloomFilter(hash,1000,3);
             var testWord = "blarg";
 
             bloomFilter.Add(testWord);
