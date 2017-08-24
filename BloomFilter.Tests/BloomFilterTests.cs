@@ -14,37 +14,51 @@ namespace BloomFilter.Tests
         [TestMethod]
         public void MainLineTestCaseMatch()
         {
-
-
             BloomFilter.IHash<string, int> hash = new SimpleHash();
-
             BloomFilter.IBloomFilter<string,int> bloomFilter = new NormanBloomFilter(hash,1000,3);
             var testWord = "blarg";
-
             bloomFilter.Add(testWord);
-
             var result1 = bloomFilter.Seek(testWord);
-
             Assert.IsTrue(result1, $"{testWord} was added to the filter, and should be the only item in the filter.  Your filter/ hash is broken");
         }
 
         [TestMethod]
         public void MainLineTestCaseNoMatch()
         {
-            Assert.Inconclusive("Not Yet Implemented");
 
-            BloomFilter.IBloomFilter<string,int> bloomFilter = null;
+            BloomFilter.IHash<string, int> hash = new SimpleHash();
+            BloomFilter.IBloomFilter<string, int> bloomFilter = new NormanBloomFilter(hash, 1000, 3);
             var testWord = "blarg";
-            var testWord2 = "butterfly";
-            
-            var hash = new List<IHash<string, int>>();
+            var testWord2 = "blargAgain";
 
             bloomFilter.Add(testWord);
-
+            bloomFilter.Add(testWord2);
             var result1 = bloomFilter.Seek(testWord);
 
             Assert.IsTrue(result1, $"{testWord2} was not added to the filter, and should be the only item in the filter.  Your filter/ hash is broken");
         }
-        
+
+        [TestMethod]
+        public void End2EndTest()
+        {
+            var stored = new List<string>() { "the", "most", "pressing", "task", "is", "to", "teach", "people", "how", "to", "learn." };
+            var notstored = new List<string>();
+
+            BloomFilter.IHash<string, int> hash = new SimpleHash();
+            BloomFilter.IBloomFilter<string, int> bloomFilter = new NormanBloomFilter(hash, 1000, 3);
+         
+            foreach(var word in stored)
+            {
+                bloomFilter.Add(word);
+                notstored.Add(word.ToUpper());
+            }
+
+            foreach(var word in notstored)
+            {
+                Assert.IsFalse(bloomFilter.Seek(word), $"{word} was not stored,how was it found?");
+            }
+
+        }
+
     }
 }
