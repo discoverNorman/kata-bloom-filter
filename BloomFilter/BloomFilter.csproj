@@ -40,13 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IBloomFilter.cs" />
+    <Compile Include="Interfaces\IHash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BloomFilter.Tests\BloomFilter.Tests.csproj">
-      <Project>{683368b8-7da3-420a-83fa-a3844367c1ee}</Project>
-      <Name>BloomFilter.Tests</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
